@@ -46,7 +46,7 @@ public class ECommerce {
 				 
 			}
 			case 6: {
-				productDao.sort();
+				productDao.callSort();
 				break;
 				 
 			}

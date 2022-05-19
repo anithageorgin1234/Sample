@@ -110,22 +110,84 @@ public class ProductDAO {
 		 
 	 }
 	 
-	 public void sort()
-	 {
-		 int n=array.length;
-			Product temp=null;
-			
-			for(int i=0;i<n;i++)
+		/*
+		 * public void sort() { int n=array.length; Product temp=null;
+		 * 
+		 * for(int i=0;i<n;i++) { for(int j=1;j<(n-i);j++) {
+		 * if(array[j-1].getId()>array[j].getId()) { temp=array[j-1];
+		 * array[j-1]=array[j]; array[j]=temp; } } } }
+		 */
+		public   void merge(Product arr[],int beg,int end,int mid )
+		{
+	 
+		  int i,j,k;
+		  int n1=mid-beg+1;
+		  int n2=end-mid;
+		  
+		  Product [] LeftArray =new Product[n1];
+
+		  Product [] RightArray =new Product[n2];
+		  for(int l=0;l<n1;l++)
+		  {
+			  LeftArray[l]=arr[beg+l];
+			  
+		  }
+		  
+		  for(int l=0;l<n2;l++)
+		  {
+			  RightArray[l]=arr[mid+1+l];
+			  
+		  }
+		  
+		  i=0;
+		  j=0;
+		  k=beg;
+		  
+		  while(i<n1 && j<n2)
+		  {
+			  if(LeftArray[i].getPrice()<=RightArray[j].getPrice())
+			  {
+				  arr[k]=LeftArray[i];
+				  i++;
+			  }
+			  else
+			  {
+				  arr[k]=RightArray[j];
+				  j++;
+			  }
+			  k++;
+		  }
+		  while(i<n1)
+		  {
+			  arr[k]=LeftArray[i];
+			  i++;
+			  k++;
+			  
+		  }
+		  while(j<n2)
+		  {
+			  arr[k]=RightArray[j];
+			  j++;
+			  k++;
+		  }
+		  
+		 
+		}
+		
+		public   void sort(Product [] arr,int beg,int end)
+		{
+			if(beg<end)
 			{
-				for(int j=1;j<(n-i);j++)
-				{
-					if(array[j-1].getId()>array[j].getId())
-					{
-						temp=array[j-1];
-						array[j-1]=array[j];
-						array[j]=temp;
-					}
-				}
+				int mid=(beg+end)/2;
+				sort(arr,beg,mid);
+				sort(arr,mid+1,end);
+				 merge(arr, beg, end, mid);
 			}
-	 }
+		}
+		
+		public void callSort()
+		{
+			sort(array,0,array.length-1);
+		}
+
 }
