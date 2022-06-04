@@ -1,0 +1,67 @@
+
+  <mat-accordion>
+   
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         To Do Details
+        </mat-panel-title>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table class="example-full-width" cellspacing="0"><tr>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Todo Title</mat-label>
+          <input matInput type="text" [(ngModel)]="totitle" >
+        </mat-form-field></td>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Text</mat-label>
+          <input matInput type="text" [(ngModel)]="todotext">
+        </mat-form-field></td>
+        <td> 
+          <button (click)="Add()">Add</button>
+        </td>
+      </tr></table>
+   
+    </mat-expansion-panel>
+  </mat-accordion>
+ 
+  <table mat-table  [dataSource]="todoList"   class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element"> {{element.title}}</td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef>Text</th>
+      <td mat-cell *matCellDef="let element"> {{element.text}}  </td>
+    </ng-container>
+  
+     
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <button type="button" (click)="edit($event)">Edit</button>
+    <button type="button" (click)="delete($event)">Delete</button>
+  </table>
+
+ 
+    <mat-toolbar color="primary">
+    
+    <span>@copy right</span>
+    <span class="example-spacer"></span>
+     
+     
+  </mat-toolbar>
+   
